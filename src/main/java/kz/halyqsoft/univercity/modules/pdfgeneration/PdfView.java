@@ -34,8 +34,7 @@ public class PdfView extends AbstractTaskView {
     @Override
     public void initView(boolean b) throws Exception {
 
-
-        generateButton = new Button("Генерировать");
+        generateButton = new Button(getUILocaleUtil().getCaption("generate"));
         addComponentButton = new Button("Добавить");
 
         pdfTitle = new TextField("Название файла");

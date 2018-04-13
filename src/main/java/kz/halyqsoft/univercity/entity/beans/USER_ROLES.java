@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class USER_ROLES extends AbstractUserRole {
 
-    @FieldInfo(type = EFieldType.FK_COMBO, inGrid = false, inEdit = false, inView = false)
+    @FieldInfo(type = EFieldType.FK_COMBO, inGrid = true, inEdit = true, inView = true)
     @ManyToOne
     @JoinColumns({
         @JoinColumn(name = "USER_ID", referencedColumnName = "ID", nullable = false)})

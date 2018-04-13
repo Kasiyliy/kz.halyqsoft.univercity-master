@@ -1424,7 +1424,7 @@ public final class ApplicantsForm extends AbstractFormWidgetView {
                 factAddressButton.removeStyleName("activedCh");
                 regAddressButton.removeStyleName("activedCh");
 
-     			/*������ �� ���*/
+
                 ID untCertificateId = ID.valueOf(-1);
                 if (!untCertificateFM.isCreateNew()) {
                     UNT_CERTIFICATE untCertificate = null;

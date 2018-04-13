@@ -2,6 +2,7 @@ package kz.halyqsoft.univercity.modules.catalog;
 
 import com.vaadin.data.Property;
 import com.vaadin.ui.HorizontalSplitPanel;
+import kz.halyqsoft.univercity.entity.beans.*;
 import kz.halyqsoft.univercity.entity.beans.univercity.catalog.*;
 import kz.halyqsoft.univercity.utils.CommonUtils;
 import org.r3a.common.dblink.facade.CommonEntityFacadeBean;
@@ -23,11 +24,13 @@ import org.r3a.common.vaadin.widget.form.FormModel;
 import org.r3a.common.vaadin.widget.form.field.fk.FKFieldModel;
 import org.r3a.common.vaadin.widget.grid.GridWidget;
 import org.r3a.common.vaadin.widget.grid.model.DBGridModel;
+import org.r3a.common.vaadin.widget.table.model.DBTableModel;
 import org.r3a.common.vaadin.widget.toolbar.AbstractToolbar;
 import org.r3a.common.vaadin.widget.toolbar.IconToolbar;
 import org.r3a.common.vaadin.widget.tree.CommonTreeWidget;
 import org.r3a.common.vaadin.widget.tree.LazyCommonTreeWidget;
 import org.r3a.common.vaadin.widget.tree.model.UOTreeModel;
+
 
 import java.util.List;
 
@@ -40,7 +43,7 @@ public class CatalogView extends AbstractTaskView implements EntityListener {
     private HorizontalSplitPanel mainHSP;
     private CommonTreeWidget entitiesCTW;
     private AbstractSelectWidget classASW;
-
+    FormModel userRoleFM;
     public CatalogView(AbstractTask task) throws Exception {
         super(task);
     }
@@ -62,13 +65,15 @@ public class CatalogView extends AbstractTaskView implements EntityListener {
 
     @Override
     public void handleEntityEvent(EntityEvent ev) {
+
         if (ev.getAction() == EntityEvent.SELECTED) {
             if (ev.getSource().equals(entitiesCTW)) {
                 Class<? extends Entity> entityClass = ((CatalogEntity) ev.getEntities().get(0)).getEntityClass();
                 if (classASW != null) {
                     mainHSP.removeComponent(classASW);
                 }
-                if (entityClass.equals(COUNTRY.class)) {
+
+                 if (entityClass.equals(COUNTRY.class)) {
                     classASW = new LazyCommonTreeWidget(COUNTRY.class);
                     classASW.getContainerPanel().setHeight(490, Unit.PIXELS);
                     classASW.addEntityListener(this);
@@ -140,8 +145,18 @@ public class CatalogView extends AbstractTaskView implements EntityListener {
                         tm.getColumnModel("endYear").setFormat(NumberUtils.INTEGER_FORMAT);
                     } */ else if (entityClass.equals(CORPUS.class)) {
                         classASW.setButtonVisible(AbstractToolbar.PREVIEW_BUTTON, false);
+                    }else if (entityClass.equals(ROLES.class)) {
+                        classASW.setButtonVisible(AbstractToolbar.DELETE_BUTTON, false);
+                        classASW.setButtonVisible(AbstractToolbar.EDIT_BUTTON, false);
+                    }else if (entityClass.equals(USER_ROLES.class)) {
+
+                        userRoleFM = ((DBSelectModel) classASW.getWidgetModel()).getFormModel();
+                        userRoleFM.getFieldModel("user").setInView(true);
+                        userRoleFM.getFieldModel("user").setInEdit(true);
+
                     }
-                }
+                 }
+
                 mainHSP.addComponent(classASW);
             }
         }

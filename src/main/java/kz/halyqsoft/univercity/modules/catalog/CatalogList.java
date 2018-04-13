@@ -1,5 +1,10 @@
 package kz.halyqsoft.univercity.modules.catalog;
 
+import kz.halyqsoft.univercity.entity.beans.ROLE_TASKS;
+import kz.halyqsoft.univercity.entity.beans.TASKS;
+import kz.halyqsoft.univercity.entity.beans.ROLES;
+import kz.halyqsoft.univercity.entity.beans.USER_ROLES;
+import kz.halyqsoft.univercity.entity.beans.univercity.USER;
 import kz.halyqsoft.univercity.entity.beans.univercity.catalog.*;
 import org.r3a.common.entity.Entity;
 import org.r3a.common.entity.ID;
@@ -51,6 +56,12 @@ class CatalogList {
         addCatalogEntityToList(ORGANIZATION.class);
         addCatalogEntityToList(SEMESTER_DATA.class);
 
+//        if() {
+            addCatalogEntityToList(TASKS.class);
+            addCatalogEntityToList(ROLES.class);
+            addCatalogEntityToList(USER_ROLES.class);
+            addCatalogEntityToList(ROLE_TASKS.class);
+//        }
         return new ArrayList<>(list);
     }
 
